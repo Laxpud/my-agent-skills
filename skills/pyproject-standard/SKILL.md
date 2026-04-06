@@ -14,7 +14,8 @@ When this skill is invoked, you MUST follow the flow below. **Every prompt to th
 1.  **Project Name (AI proposal + user confirmation + skip)**: Propose a project name that complies with community norms (GitHub/PyPI). Ask the user to confirm, modify, or skip.
 2.  **Project Description (AI proposal + user confirmation + skip)**: Derive a concise description from the project domain or existing files (e.g., README, main module docstrings). Ask the user to confirm, modify, or skip.
 3.  **Author Information (name + email + skip)**: Ask the user for their name and email address to populate the `authors` field. If skipped, leave as `<author-name>` / `<author-email>`.
-4.  **Analyze Python/Dependencies**: If the user's project `pyproject.toml` lacks `requires-python` or dependency version information, analyze the codebase to identify required dependencies and propose appropriate version constraints. Present the proposal to the user — they may accept, modify, or skip.
+4.  **Repository URL (AI proposal + user confirmation + skip)**: Propose a GitHub repository URL (e.g., `https://github.com/<author>/<project>`). Ask the user to confirm, modify, or skip; if skipped, leave as `<repository-url>`.
+5.  **Analyze Python/Dependencies**: If the user's project `pyproject.toml` lacks `requires-python` or dependency version information, analyze the codebase to identify required dependencies and propose appropriate version constraints. Present the proposal to the user — they may accept, modify, or skip.
 
 ## Core Rules
 
@@ -104,9 +105,6 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 path = "src/__init__.py"
 
-[tool.hatch.build.targets.wheel]
-packages = ["src"]
-
 # 配置 uv 使用清华镜像源加速下载
 [[tool.uv.index]]
 name = "tsinghua"
@@ -134,3 +132,28 @@ When adding dependencies:
 - [ ] `license = { file = "LICENSE" }` is set.
 - [ ] Tsinghua mirror configuration is present under `[[tool.uv.index]]`.
 - [ ] **Optional sections (`scripts`, `entry-points`, `optional-dependencies`, specific `classifiers`) are reviewed and included only if necessary.**
+
+## Project Information Summary
+
+After completing `pyproject.toml` generation, inform the user about the following key project configurations:
+
+1. **Src Layout**: The project uses `src` directory layout. Hatchling automatically discovers package structure from `src/<package-name>/`.
+2. **Version Management**: Version is dynamically managed via the `__version__` variable in `src/__init__.py`.
+3. **Mirror Configuration**: Tsinghua mirror (`https://pypi.tuna.tsinghua.edu.cn/simple`) is configured for faster dependency downloads.
+4. **Build System**: Uses `hatchling` as the build backend.
+5. **Required Files**: Ensure `LICENSE` and `README.md` files exist in the project root — the skill references these external files.
+
+**Project Structure Example:**
+
+```
+project/
+├── src/
+│   └── <package-name>/
+│       ├── __init__.py      # contains __version__ variable
+│       └── ...
+├── pyproject.toml
+├── LICENSE
+└── README.md
+```
+
+Replace the above information with the actual project name and configuration before informing the user.
