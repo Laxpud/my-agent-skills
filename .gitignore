@@ -15,6 +15,7 @@ env/
 .vscode/
 .idea/
 .trae/
+.claude/
 
 # 环境变量文件
 .env

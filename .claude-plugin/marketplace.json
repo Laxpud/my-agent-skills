@@ -1,0 +1,24 @@
+{
+  "name": "my-awesome-vibekits",
+  "id": "my-awesome-vibekits",
+  "owner": {
+    "name": "Laxpud"
+  },
+  "metadata": {
+    "description": "实用技能和规则集合，帮助提升代码质量和开发效率",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "my-awesome-vibekits",
+      "source": "./",
+      "description": "包含代码注释标准化、Python项目配置最佳实践等实用技能和规则",
+      "version": "1.0.0",
+      "author": {
+        "name": "Laxpud"
+      },
+      "keywords": ["vibekits", "code-quality", "standardization", "python", "documentation"],
+      "category": "workflow"
+    }
+  ]
+}
