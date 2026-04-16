@@ -11,7 +11,7 @@
 ├── rules/                 # 规则目录
 │   └── code-comment-standard/  # 代码注释标准规则
 ├── .gitignore             # Git忽略文件
-├── AGENTS.md              # Agent指南
+├── CLAUDE.md              # Claude Code Guidelines
 └── README.md              # 仓库说明文件
 ```
 
